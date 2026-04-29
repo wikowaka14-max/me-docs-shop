@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Магазин ответов</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Магазин готовых документов</h1>
+    <nav>
+      <ul>
+        <li><a href="#catalog">Каталог</a></li>
+       
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero">
+      <h2>Готовые документы для вашей учебы</h2>
+      <p>Конспекты, СРСП , лабороторки а также на них ответы</p>
+      <a href="#catalog" class="btn">Смотреть каталог</a>
+    </section>
+
+    <!-- НАЧИНАЕТСЯ СЕКЦИЯ КАТАЛОГА -->
+    <section id="catalog">
+      <h2>Каталог </h2>
+
+      <!-- СЮДА ВСТАВЛЯЕМ КАРТОЧКИ ТОВАРОВ -->
+      <div class="document-card">
+        <h3>Google Disk</h3>
+        <p>Гугл диск со всеми ответами и конспекты по предметам на месяц</p>
+        <p><strong>Формат:</strong> Google Disk</p>
+        <p><strong>Цена:</strong> 1.500₸</p>
+        <a href="#order-form" class="btn">Оформить заказ</a>
+
+      </div>
+
+      <div class="document-card">
+        <h3>Google Disk</h3>
+        <p>Гугл диск со всеми ответами и конспекты по предметам на 6 месяцев</p>
+        <p><strong>Формат:</strong> Google Disk</p>
+        <p><strong>Цена:</strong> 5.000 ₸</p>
+        <a href="#order-form" class="btn">Оформить заказ</a>
+
+      </div>
+
+      <div class="document-card">
+        <h3>Google Disk</h3>
+        <p>Гугл диск со всеми ответами и конспекты по предметам на 10 месяцев</p>
+        <p><strong>Формат:</strong> Google Disk</p>
+        <p><strong>Цена:</strong> 8.000₸</p>
+        <a href="#order-form" class="btn">Оформить заказ</a>
+
+      </div>
+
+      <!-- ЗАКАНЧИВАЕМ ВСТАВКУ КАРТОЧЕК -->
+
+    </section>
+    <!-- ЗАКАНЧИВАЕТСЯ СЕКЦИЯ КАТАЛОГА -->
+  </main>
+
+  <!-- ДОБАВЛЯЕМ СЕКЦИИ "О НАС" И "КОНТАКТЫ" -->
+  
+
+  <section id="contacts">
+    <h2>Контакты</h2>
+    <p>Телефон: +7 (776) 524 82-83</p>
+    <p>Телеграмм: @veyr_1x</p>
+  </section>
+  <!-- ЗАКАНЧИВАЕМ ДОБАВЛЕНИЕ СЕКЦИЙ -->
+
+
+  <footer>
+<section id="order-form">
+  <h2>Оформление заказа</h2>
+  <form id="telegramForm">
+    <div>
+      <label for="document">Выберите документ:</label>
+      <select id="document" name="document" required>
+        <option value="">-- Выберите --</option>
+        <option value="Месяц (1.500 ₸)">Месяц — 1.500 ₸</option>
+        <option value="6 Месяцев (5.000 ₸)">6 Месяцев — 5.000 ₸</option>
+        <option value="10 Месяцев (8.000 ₸)">10 Месяцев — 8.000 ₸</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="name">Ваше имя:</label>
+      <input type="text" id="name" name="name" placeholder="Иван И." required>
+    </div>
+
+    <div>
+      <label for="phone">Телефон/Telegramm:</label>
+      <input type="tel" id="phone" name="phone" placeholder="" required>
+    </div>
+
+    <p><strong>Способ оплаты:</strong> Перевод на Kaspi Gold</p>
+    <p><strong>Номер получателя:</strong> +7 (776) 524 82-83</p>
+    <p><strong>Получатель:</strong> Дмитрий М.</p>
+
+    <div>
+      <label for="screenshot">Прикрепите скриншот чека:</label>
+      <input type="file" id="screenshot" name="screenshot" accept="image/*" required>
+    </div>
+
+    <button type="submit" class="btn">Отправить заказ и скриншот</button>
+  </form>
+</section>
+
+
+    <p>&copy; 2026 Магазин документов. Все права защищены.</p>
+  </footer>
+<script>
+document.getElementById('telegramForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const selectedDocument = document.getElementById('document').value;
+  const name = document.getElementById('name').value;
+  const phone = document.getElementById('phone').value;
+  const screenshot = document.getElementById('screenshot').files[0];
+
+  if (!screenshot) {
+    alert('Пожалуйста, прикрепите скриншот чека!');
+    return;
+  }
+
+  // Текст сообщения для Telegram
+  const message = `📦 Новый заказ!
+
+📄 Документ: ${selectedDocument}
+👤 Имя: ${name}
+📞 Телефон: ${phone}`;
+
+  try {
+    // Отправляем фото с подписью (в одном запросе)
+    const formData = new FormData();
+    formData.append('chat_id', '8338406455');
+    formData.append('photo', screenshot);
+    formData.append('caption', message);
+
+    const response = await fetch('https://api.telegram.org/bot8255954915:AAF_vJJMMslWIZr1uzibvck4oj0MB07yhRM/sendPhoto', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (response.ok) {
+      alert('Спасибо! Ваш заказ принят. Мы свяжемся с вами после проверки оплаты.');
+      document.getElementById('telegramForm').reset();
+    } else {
+      const errorData = await response.json();
+      console.error('Ошибка Telegram API:', errorData);
+      alert(`Ошибка отправки: ${errorData.description || 'Неизвестная ошибка'}. Напишите нам напрямую в Telegram.`);
+    }
+  } catch (error) {
+    console.error('Критическая ошибка:', error);
+    alert('Произошла ошибка сети. Проверьте подключение и попробуйте снова.');
+  }
+});
+</script>
+
+
+</body>
+</html>
