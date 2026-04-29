@@ -1,0 +1,134 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #e0e0e0; /* Светло‑серый текст */
+  background-color: #2a2a2a; /* Тёмно‑серый фон страницы */
+}
+
+header {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); /* Тёмно‑голубой градиент */
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+  border-bottom: 2px solid #3a3a3a; /* Тонкая тёмно‑серая граница */
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+nav a {
+  color: #a0c4ff; /* Светло‑голубой для ссылок */
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+nav a:hover {
+  color: #ffffff; /* Белый при наведении */
+  background: #3a506b; /* Тёмно‑синий фон при наведении */
+}
+
+#hero {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%); /* Тёмно‑голубой градиент */
+  color: #ffffff;
+}
+
+#hero h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #f0f8ff; /* Очень светло‑голубой */
+}
+
+#hero p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: #b0c4de; /* Стальной голубой */
+}
+
+.btn {
+  display: inline-block;
+  background: #3a506b; /* Тёмно‑синий */
+  color: #ffffff;
+  padding: 0.8rem 1.5rem;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s;
+  border: 1px solid #5bc0be; /* Бирюзовая обводка */
+}
+
+.btn:hover {
+  background: #1e3c72; /* Тёмнее при наведении */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#catalog {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.document-card {
+  background: #3a3a3a; /* Тёмно‑серый фон карточки */
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-left: 4px solid #3a506b; /* Тёмно‑синяя полоса слева */
+}
+
+.document-card h3 {
+  color: #89cff0; /* Небесно‑голубой для заголовков карточек */
+  margin-bottom: 0.5rem;
+}
+
+.document-card p {
+  color: #d3d3d3; /* Светло‑серый для текста в карточках */
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #1e1e1e; /* Очень тёмно‑серый */
+  color: #808080; /* Средний серый для подвала */
+  margin-top: 2rem;
+  border-top: 1px solid #3a3a3a;
+}
+#screenshot {
+  width: 100%;
+  padding: 0.8rem;
+  background: #3a3a3a;
+  border: 1px solid #5bc0be;
+  border-radius: 4px;
+  color: white;
+}
+
+#screenshot::file-selector-button {
+  background: #3a506b;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#screenshot::file-selector-button:hover {
+  background: #1e3c72;
+}
